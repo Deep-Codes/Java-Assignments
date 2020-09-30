@@ -1,0 +1,18 @@
+.root{
+ -fx-background-color: #1e1e1e;
+ -fx-font-family: 'Montserrat', Arial, sans-serif;
+ -fx-text-fill: #A6B1E1;
+}
+.selectedLang{
+ -fx-font-size: 15px;
+ -fx-text-fill: #A6B1E1;
+}
+.startGameBtn{
+ -fx-background-color: #8d93ab;
+}
+.dashWord{
+ -fx-text-fill: #A6B1E1;
+}
+.hintWord{
+ -fx-text-fill: #A6B1E1;
+}

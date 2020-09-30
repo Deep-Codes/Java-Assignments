@@ -10,34 +10,80 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Random;
 
 
 public class Main extends Application {
 
+    String choiceSelected;
+    String genWord;
+    String hint = "hint to show";
+    String word = "dashed word to show";
+    Label dashWord = new Label(word);
+    Label hintWord  = new Label(hint);
+
     @Override
     public void start(Stage stage) throws Exception {
+
+        // Steps to Create JavaFx Scenes
+
+        // 1. Create a layout ( Anchor Pane )
+        // Must end with 'Page'
+        // AnchorPane landingPage = new AnchorPane();
+
+        // 2. Creating a Scene
+        // Must end with 'Scene'
+        //  landingScene = new Scene(parent);
+
+        // 3. Add Elements in the Layout
+        // landingScene.getChildren().add(logo);
+
+        // 4. Setting up Styling
+        // landingScene.getStylesheets().add("stylesheets/landingPage.css");
+
+        // Adding a Style
+        // test.getStyleClass().add("test");
+
+        // 4. Setting up the Scene into the Stage
+        // stage.setScene(landingScene);
+
+        // Game Hierarchy
+        // Landing Scene ->
+        // Start Game ->
+
+        // Not to be altered
         stage.setTitle("vGuess");
         stage.setWidth(700);
         stage.setHeight(500);
 
-        // Parent layout
-        AnchorPane parent = new AnchorPane();
+        /* START OF THE LANDING PAGE */
 
-        AnchorPane game = new AnchorPane();
+        // Parent layouts
+        AnchorPane landingPage = new AnchorPane();
+        AnchorPane gamePage = new AnchorPane();
 
-        // Showing an Image
-        ImageView img1  = new ImageView("vguessLogo.png");
-        img1.setX(50);
-        img1.setY(50);
-        parent.getChildren().add(img1);
+        // Scenes
+        Scene landingScene = new Scene(landingPage);
+        landingScene.getStylesheets().add("stylesheets/landingPage.css");
+        Scene gameScene = new Scene(gamePage);
+        gameScene.getStylesheets().add("stylesheets/landingPage.css");
+
+        // vGuess LOGO
+        ImageView logo  = new ImageView("vguessLogo.png");
+        logo.setX(140);
+        logo.setY(40);
+        landingPage.getChildren().add(logo);
 
 
-
-
-        // Creating a Label
-        Label label1 = new Label("Selected Language : None");
-        label1.setTextFill(Color.WHEAT);
-        parent.getChildren().add(label1);
+        //  Language
+        Label selectedLang = new Label("Selected Language : None");
+        selectedLang.getStyleClass().add("selectedLang");
+        landingPage.getChildren().add(selectedLang);
+        selectedLang.setLayoutX(260);
+        selectedLang.setLayoutY(180);
 
         // Menu Items
         MenuItem lang1 = new MenuItem("Java");
@@ -47,48 +93,91 @@ public class Main extends Application {
         MenuItem lang5 = new MenuItem("CSS");
         MenuItem lang6 = new MenuItem("Python");
 
-        lang1.setOnAction(actionEvent -> {
-            System.out.println(lang1.getText());
-            label1.setText("Selected : "+lang1.getText());
-        });
-
         MenuButton menu1 = new MenuButton("Select a Language",null,lang1,lang2,lang3,lang4,lang5,lang6);
-        parent.getChildren().add(menu1);
+        menu1.setLayoutX(280);
+        menu1.setLayoutY(220);
+        landingPage.getChildren().add(menu1);
 
-
-
-        // Creating a Scene
-        Scene scene1 = new Scene(parent);
-        scene1.getStylesheets().add("stylesheets/styles.css");
-
-        // Setting up the Scene
-        stage.setScene(scene1);
-
-        ImageView img2  = new ImageView("vguessLogo.png");
-        img2.setX(50);
-        img2.setY(50);
-        game.getChildren().add(img2);
-
-        // Scene 2
-        Scene start = new Scene(game);
-
-
-        // Button
-        Button btn1 = new Button("Click Me");
-        btn1.setStyle(" -fx-font-size: 15px");
-        btn1.setTranslateY(168);
-        parent.getChildren().add(btn1);
-        btn1.setOnAction(actionEvent ->{
-            System.out.println("BUtton is CLikced");
-            stage.setScene(start);
+        lang6.setOnAction(actionEvent -> {
+            choiceSelected = lang6.getText();
+//            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang6.getText());
         });
+
+        Button startGameBtn = new Button("Start Game");
+        startGameBtn.setLayoutX(280);
+        startGameBtn.setLayoutY(270);
+        startGameBtn.getStyleClass().add("startGameBtn");
+        landingPage.getChildren().add(startGameBtn);
+
+        /* GAME PAGE */
+        dashWord.getStyleClass().add("dashWord");
+        landingPage.getChildren().add(dashWord);
+        dashWord.setLayoutX(260);
+        dashWord.setLayoutY(180);
+        gamePage.getChildren().add(dashWord);
+
+        hintWord.getStyleClass().add("hintWord");
+        landingPage.getChildren().add(hintWord);
+        hintWord.setLayoutX(260);
+        hintWord.setLayoutY(230);
+        gamePage.getChildren().add(hintWord);
+
+        startGameBtn.setOnAction(actionEvent ->{
+           // Change Scene
+            stage.setScene(gameScene);
+            generateWord(choiceSelected);
+        });
+
+
+
+
+
+
+        // Set up the Scene
+        stage.setScene(landingScene);
+
+        /* END OF THE LANDING PAGE */
 
         stage.show();
     }
 
+    public String generateWord(String choiceSelected) {
+        System.out.println(choiceSelected);
+        if (choiceSelected.equals("Python")){
+
+        }
+        ArrayList<String> wordsList = new ArrayList<String>();
+        wordsList.add("py");
+        wordsList.add("lambda");
+        wordsList.add("ArithmeticError");
+        wordsList.add("remove");
+        wordsList.add("capitalize");
+
+        Random rand = new Random();
+        int random = (int)(Math.random() * (wordsList.size()));
+        String randomGenWord = wordsList.get(random);
+
+        Dictionary list = new Hashtable();
+        list.put("py","What is the correct file extension for Python files?");
+        list.put("lambda","what is used to create an anonymous function? ");
+        list.put("ArithmeticError","Raised when an error occurs in numeric calculations.");
+        list.put("remove","Removes the specified element of a set/list.");
+        list.put("capitalize"," used to convert the first character to upper case.");
+
+        genWord = randomGenWord;
+        hint = (String) list.get(randomGenWord);
+        System.out.println(randomGenWord);
+        System.out.println("Hint: "+list.get(randomGenWord));
+
+        dashWord.setText(genWord);
+        hintWord.setText(hint);
+        return randomGenWord;
+    }
+
     public static void main(String[] args) {
         launch(args);
-        System.out.println("Hello World");
+        System.out.println("Init vGuess game");
 
     }
 }
