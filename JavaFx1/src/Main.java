@@ -1,9 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Random;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 
 public class Main extends Application {
@@ -24,6 +23,7 @@ public class Main extends Application {
     String word = "dashed word to show";
     Label dashWord = new Label(word);
     Label hintWord  = new Label(hint);
+    TextField userInput = new TextField();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -121,7 +121,31 @@ public class Main extends Application {
         landingPage.getChildren().add(hintWord);
         hintWord.setLayoutX(260);
         hintWord.setLayoutY(230);
+        gamePage.getChildren().add(userInput);
         gamePage.getChildren().add(hintWord);
+
+        userInput.setLayoutX(260);
+        userInput.setLayoutY(270);
+        Pattern pattern = Pattern.compile("[a-zA-Z]*");
+        UnaryOperator<TextFormatter.Change> filter = c -> {
+            if (pattern.matcher(c.getControlNewText()).matches()) {
+                return c ;
+            } else {
+                return null;
+            }
+        };
+        TextFormatter<String> formatter = new TextFormatter<>(filter);
+        userInput.setTextFormatter(formatter);
+
+        Button submitLetterBtn = new Button("Check Letter");
+        submitLetterBtn.setLayoutX(280);
+        submitLetterBtn.setLayoutY(310);
+        submitLetterBtn.getStyleClass().add("submitLetterBtn");
+        gamePage.getChildren().add(submitLetterBtn);
+
+        submitLetterBtn.setOnAction(actionEvent -> {
+            System.out.println(userInput.getText());
+        });
 
         startGameBtn.setOnAction(actionEvent ->{
            // Change Scene
@@ -129,10 +153,7 @@ public class Main extends Application {
             generateWord(choiceSelected);
         });
 
-
-
-
-
+        
 
         // Set up the Scene
         stage.setScene(landingScene);
