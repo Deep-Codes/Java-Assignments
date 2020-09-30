@@ -16,9 +16,12 @@ import java.util.regex.Pattern;
 
 
 public class Main extends Application {
+    String randomGenWord;
 
     String choiceSelected;
     String genWord;
+    int livesRemaining = 6;
+    String userGuess;
     String hint = "hint to show";
     String word = "dashed word to show";
     Label dashWord = new Label(word);
@@ -115,6 +118,7 @@ public class Main extends Application {
         landingPage.getChildren().add(dashWord);
         dashWord.setLayoutX(260);
         dashWord.setLayoutY(180);
+        dashWord.setLineSpacing(20);
         gamePage.getChildren().add(dashWord);
 
         hintWord.getStyleClass().add("hintWord");
@@ -145,15 +149,16 @@ public class Main extends Application {
 
         submitLetterBtn.setOnAction(actionEvent -> {
             System.out.println(userInput.getText());
+            checkGuess(genWord,livesRemaining);
         });
 
         startGameBtn.setOnAction(actionEvent ->{
            // Change Scene
             stage.setScene(gameScene);
-            generateWord(choiceSelected);
+            genWord = generateWord(choiceSelected);
         });
 
-        
+
 
         // Set up the Scene
         stage.setScene(landingScene);
@@ -166,34 +171,78 @@ public class Main extends Application {
     public String generateWord(String choiceSelected) {
         System.out.println(choiceSelected);
         if (choiceSelected.equals("Python")){
+            ArrayList<String> wordsList = new ArrayList<String>();
+            wordsList.add("py");
+            wordsList.add("lambda");
+            wordsList.add("ArithmeticError");
+            wordsList.add("remove");
+            wordsList.add("capitalize");
+
+            Random rand = new Random();
+            int random = (int)(Math.random() * (wordsList.size()));
+            randomGenWord = wordsList.get(random);
+
+            Dictionary list = new Hashtable();
+            list.put("py","What is the correct file extension for Python files?");
+            list.put("lambda","what is used to create an anonymous function? ");
+            list.put("ArithmeticError","Raised when an error occurs in numeric calculations.");
+            list.put("remove","Removes the specified element of a set/list.");
+            list.put("capitalize"," used to convert the first character to upper case.");
+            genWord = randomGenWord;
+            hint = (String) list.get(randomGenWord);
+            System.out.println(randomGenWord);
+            System.out.println("Hint: "+list.get(randomGenWord));
+
+            dashWord.setText(genWord);
+            hintWord.setText(hint);
 
         }
-        ArrayList<String> wordsList = new ArrayList<String>();
-        wordsList.add("py");
-        wordsList.add("lambda");
-        wordsList.add("ArithmeticError");
-        wordsList.add("remove");
-        wordsList.add("capitalize");
-
-        Random rand = new Random();
-        int random = (int)(Math.random() * (wordsList.size()));
-        String randomGenWord = wordsList.get(random);
-
-        Dictionary list = new Hashtable();
-        list.put("py","What is the correct file extension for Python files?");
-        list.put("lambda","what is used to create an anonymous function? ");
-        list.put("ArithmeticError","Raised when an error occurs in numeric calculations.");
-        list.put("remove","Removes the specified element of a set/list.");
-        list.put("capitalize"," used to convert the first character to upper case.");
-
-        genWord = randomGenWord;
-        hint = (String) list.get(randomGenWord);
-        System.out.println(randomGenWord);
-        System.out.println("Hint: "+list.get(randomGenWord));
-
-        dashWord.setText(genWord);
-        hintWord.setText(hint);
         return randomGenWord;
+    }
+
+    char[] filler;
+
+    public void checkGuess(String s ,int x) {
+        filler=new char[s.length()];
+        int i=0;
+        while(i<(s.length())) {
+            if(s.charAt(i)==' '){
+                filler[i]=' ';
+            }
+            else
+                filler[i]= '-';
+            i++;
+        }
+        dashWord.setText(String.valueOf(filler));
+        System.out.println(filler);
+        System.out.println("life remaining = "+ x);
+
+        ArrayList<Character> l=new ArrayList<Character>();
+        if(x>0) {
+            char z=userInput.getText().toLowerCase().charAt(0);
+            if(l.contains(z)) {
+                System.out.println("Already entered");
+            }
+            l.add(z);
+            if(s.contains(z+"")) {
+                for(int y=0;y<s.length();y++) {
+                    if(s.charAt(y)==z)
+                        filler[y]=z;
+                }
+            }
+            else {
+                x--;
+            }
+            if(s.equals(String.valueOf(filler))) {
+                System.out.println(filler);
+                System.out.println("you win !!!!");
+            }
+            System.out.println(filler);
+            System.out.println("life remaining = "+ x);
+        }
+        if(x==0) {
+            System.out.println("You Lost !!!!");
+        }
     }
 
     public static void main(String[] args) {
