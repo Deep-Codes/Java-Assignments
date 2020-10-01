@@ -16,6 +16,9 @@
 .hintWord{
  -fx-text-fill: #A6B1E1;
 }
+.lifeLabel{
+ -fx-text-fill: #A6B1E1;
+}
 .text-input {
    -fx-control-inner-background: #A6B1E1;
    -fx-text-fill: #1e1e1e;

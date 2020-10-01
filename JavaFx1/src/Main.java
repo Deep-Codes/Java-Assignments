@@ -27,6 +27,7 @@ public class Main extends Application {
     String word = "dashed word to show";
     Label dashWord = new Label(word);
     Label hintWord  = new Label(hint);
+    Label lifeLabel = new Label("Lives Remaining: 6");
     TextField userInput = new TextField();
 
     @Override
@@ -121,6 +122,11 @@ public class Main extends Application {
         dashWord.setLayoutY(180);
         dashWord.setLineSpacing(20);
         gamePage.getChildren().add(dashWord);
+
+        lifeLabel.setLayoutX(260);
+        lifeLabel.setLayoutY(350);
+        lifeLabel.getStyleClass().add("lifeLabel");
+        gamePage.getChildren().add(lifeLabel);
 
         hintWord.getStyleClass().add("hintWord");
         landingPage.getChildren().add(hintWord);
@@ -221,6 +227,7 @@ public class Main extends Application {
         }
         if (asterisk.equals(newasterisk)) {
             livesRemaining--;
+            lifeLabel.setText("Lives Remaining: "+livesRemaining);
             System.out.println("Lives Remaining: "+livesRemaining);
         } else {
             asterisk = newasterisk;
@@ -229,9 +236,7 @@ public class Main extends Application {
             System.out.println("Correct! You win! The word was " + realWord);
         }
         System.out.println(asterisk);
-//        for (int i =0; i<s.length(); i++){
-//            System.out.println(s.charAt(i)+"\n");
-//        }
+        dashWord.setText(asterisk);
     }
 
     public static void main(String[] args) {
