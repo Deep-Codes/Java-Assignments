@@ -197,7 +197,7 @@ public class Main extends Application {
             if ( initDashed == 1){
                 initDashed--;
                 System.out.println("I run only once");
-                asterisk = new String(new char[genWord.length()]).replace("\0", "-");
+                asterisk = new String(new char[genWord.length()]).replace("\0", "*");
                 dashWord.setText(asterisk);
             }
 //            dashWord.setText(genWord);
@@ -208,9 +208,30 @@ public class Main extends Application {
     }
 
     int livesRemaining = 6;
-
-    public void checkGuess(String s , String userGuess ) {
-        
+    public void checkGuess(String realWord , String userGuess ) {
+        String newasterisk = "";
+        for (int i = 0; i < realWord.length(); i++) {
+            if (realWord.charAt(i) == userGuess.charAt(0)) {
+                newasterisk += userGuess.charAt(0);
+            } else if (asterisk.charAt(i) != '*') {
+                newasterisk += realWord.charAt(i);
+            } else {
+                newasterisk += "*";
+            }
+        }
+        if (asterisk.equals(newasterisk)) {
+            livesRemaining--;
+            System.out.println("Lives Remaining: "+livesRemaining);
+        } else {
+            asterisk = newasterisk;
+        }
+        if (asterisk.equals(realWord)) {
+            System.out.println("Correct! You win! The word was " + realWord);
+        }
+        System.out.println(asterisk);
+//        for (int i =0; i<s.length(); i++){
+//            System.out.println(s.charAt(i)+"\n");
+//        }
     }
 
     public static void main(String[] args) {
