@@ -17,9 +17,10 @@ import java.util.regex.Pattern;
 
 public class Main extends Application {
     String randomGenWord;
-
+    String asterisk;
     String choiceSelected;
     String genWord;
+    int initDashed = 1;
 //    int livesRemaining = 6;
     String userGuess;
     String hint = "hint to show";
@@ -149,7 +150,7 @@ public class Main extends Application {
 
         submitLetterBtn.setOnAction(actionEvent -> {
             System.out.println(userInput.getText());
-            checkGuess(genWord);
+            checkGuess(genWord,userInput.getText());
         });
 
         startGameBtn.setOnAction(actionEvent ->{
@@ -193,27 +194,29 @@ public class Main extends Application {
             System.out.println(randomGenWord);
             System.out.println("Hint: "+list.get(randomGenWord));
 
-            dashWord.setText(genWord);
+            if ( initDashed == 1){
+                initDashed--;
+                System.out.println("I run only once");
+                asterisk = new String(new char[genWord.length()]).replace("\0", "-");
+                dashWord.setText(asterisk);
+            }
+//            dashWord.setText(genWord);
             hintWord.setText(hint);
 
         }
         return randomGenWord;
     }
 
-    char[] filler ;
     int livesRemaining = 6;
-    public void checkGuess(String s ) {
-        filler =new char[s.length()];
-        System.out.println(filler);
-        System.out.println("String: "+s+ "Lives Remanining: "+livesRemaining);
-        livesRemaining--;
-        System.out.println("String: "+s+ "Lives Remanining: "+livesRemaining);
+
+    public void checkGuess(String s , String userGuess ) {
+        
     }
 
     public static void main(String[] args) {
-        launch(args);
         System.out.println("Init vGuess game");
-
+        launch(args);
+        System.out.println("Closing vGuess game");
     }
 }
 
