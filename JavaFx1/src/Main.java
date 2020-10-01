@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -67,8 +68,12 @@ public class Main extends Application {
         /* START OF THE LANDING PAGE */
 
         // Parent layouts
-        AnchorPane landingPage = new AnchorPane();
-        AnchorPane gamePage = new AnchorPane();
+        VBox landingPage = new VBox();
+        landingPage.setAlignment(Pos.CENTER);
+        landingPage.setSpacing(20);
+        VBox gamePage = new VBox();
+        gamePage.setAlignment(Pos.CENTER);
+        gamePage.setSpacing(20);
 
         // Scenes
         Scene landingScene = new Scene(landingPage);
@@ -78,8 +83,6 @@ public class Main extends Application {
 
         // vGuess LOGO
         ImageView logo  = new ImageView("vguessLogo.png");
-        logo.setX(140);
-        logo.setY(40);
         landingPage.getChildren().add(logo);
 
 
@@ -99,8 +102,6 @@ public class Main extends Application {
         MenuItem lang6 = new MenuItem("Python");
 
         MenuButton menu1 = new MenuButton("Select a Language",null,lang1,lang2,lang3,lang4,lang5,lang6);
-        menu1.setLayoutX(280);
-        menu1.setLayoutY(220);
         landingPage.getChildren().add(menu1);
 
         lang6.setOnAction(actionEvent -> {
@@ -110,16 +111,13 @@ public class Main extends Application {
         });
 
         Button startGameBtn = new Button("Start Game");
-        startGameBtn.setLayoutX(280);
-        startGameBtn.setLayoutY(270);
         startGameBtn.getStyleClass().add("startGameBtn");
         landingPage.getChildren().add(startGameBtn);
 
         /* GAME PAGE */
         dashWord.getStyleClass().add("dashWord");
         landingPage.getChildren().add(dashWord);
-        dashWord.setLayoutX(260);
-        dashWord.setLayoutY(180);
+
         dashWord.setLineSpacing(20);
         gamePage.getChildren().add(dashWord);
 
@@ -137,6 +135,8 @@ public class Main extends Application {
 
         userInput.setLayoutX(260);
         userInput.setLayoutY(270);
+        userInput.setMaxWidth(160);
+
         Pattern pattern = Pattern.compile("[a-zA-Z]*");
         UnaryOperator<TextFormatter.Change> filter = c -> {
             if (pattern.matcher(c.getControlNewText()).matches()) {

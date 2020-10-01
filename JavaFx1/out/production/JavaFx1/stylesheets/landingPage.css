@@ -1,5 +1,6 @@
 .root{
- -fx-background-color: #1e1e1e;
+ -fx-background-color:
+         linear-gradient(#0f4c75, #1b262c);
  -fx-font-family: 'Montserrat', Arial, sans-serif;
  -fx-text-fill: #A6B1E1;
 }
@@ -9,15 +10,20 @@
 }
 .startGameBtn{
  -fx-background-color: #8d93ab;
+ }
 }
 .dashWord{
  -fx-text-fill: #A6B1E1;
+ -fx-font-size: 35px;
 }
 .hintWord{
  -fx-text-fill: #A6B1E1;
+ -fx-font-size: 16px;
 }
 .lifeLabel{
  -fx-text-fill: #A6B1E1;
+ -fx-font-size: 20px;
+ -fx-font-weight: 500;
 }
 .text-input {
    -fx-control-inner-background: #A6B1E1;
