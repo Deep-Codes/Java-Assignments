@@ -20,7 +20,7 @@ public class Main extends Application {
 
     String choiceSelected;
     String genWord;
-    int livesRemaining = 6;
+//    int livesRemaining = 6;
     String userGuess;
     String hint = "hint to show";
     String word = "dashed word to show";
@@ -149,7 +149,7 @@ public class Main extends Application {
 
         submitLetterBtn.setOnAction(actionEvent -> {
             System.out.println(userInput.getText());
-            checkGuess(genWord,livesRemaining);
+            checkGuess(genWord);
         });
 
         startGameBtn.setOnAction(actionEvent ->{
@@ -200,49 +200,14 @@ public class Main extends Application {
         return randomGenWord;
     }
 
-    char[] filler;
-
-    public void checkGuess(String s ,int x) {
-        filler=new char[s.length()];
-        int i=0;
-        while(i<(s.length())) {
-            if(s.charAt(i)==' '){
-                filler[i]=' ';
-            }
-            else
-                filler[i]= '-';
-            i++;
-        }
-        dashWord.setText(String.valueOf(filler));
+    char[] filler ;
+    int livesRemaining = 6;
+    public void checkGuess(String s ) {
+        filler =new char[s.length()];
         System.out.println(filler);
-        System.out.println("life remaining = "+ x);
-
-        ArrayList<Character> l=new ArrayList<Character>();
-        if(x>0) {
-            char z=userInput.getText().toLowerCase().charAt(0);
-            if(l.contains(z)) {
-                System.out.println("Already entered");
-            }
-            l.add(z);
-            if(s.contains(z+"")) {
-                for(int y=0;y<s.length();y++) {
-                    if(s.charAt(y)==z)
-                        filler[y]=z;
-                }
-            }
-            else {
-                x--;
-            }
-            if(s.equals(String.valueOf(filler))) {
-                System.out.println(filler);
-                System.out.println("you win !!!!");
-            }
-            System.out.println(filler);
-            System.out.println("life remaining = "+ x);
-        }
-        if(x==0) {
-            System.out.println("You Lost !!!!");
-        }
+        System.out.println("String: "+s+ "Lives Remanining: "+livesRemaining);
+        livesRemaining--;
+        System.out.println("String: "+s+ "Lives Remanining: "+livesRemaining);
     }
 
     public static void main(String[] args) {
