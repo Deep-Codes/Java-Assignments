@@ -12,6 +12,10 @@
  -fx-background-color: #8d93ab;
  }
 }
+.clickedStartGameBtn
+{
+ -fx-background-color: #ffffff;
+}
 .dashWord{
  -fx-text-fill: #A6B1E1;
  -fx-font-size: 35px;
