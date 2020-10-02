@@ -31,3 +31,8 @@
    -fx-text-fill: #1e1e1e;
    -fx-opacity: 1;
  }
+ .helpPage{
+  -fx-font-size: 13px;
+   -fx-font-family: 'Montserrat', Arial, sans-serif;
+   -fx-text-fill: #A6B1E1;
+ }

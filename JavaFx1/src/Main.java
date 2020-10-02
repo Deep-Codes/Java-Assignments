@@ -79,6 +79,16 @@ public class Main extends Application {
 
 
         // Help Page
+        VBox helpPage = new VBox();
+        helpPage.setAlignment(Pos.CENTER);
+        helpPage.setSpacing(20);
+
+        Button helpButton = new Button("Help");
+        helpButton.getStyleClass().add("helpButton");
+
+        Button homeButton = new Button("Home");
+        homeButton.getStyleClass().add("homeButton");
+
         // Credits Page
 
         // Scenes
@@ -87,6 +97,9 @@ public class Main extends Application {
         Scene gameScene = new Scene(gamePage);
         gameScene.getStylesheets().add("stylesheets/landingPage.css");
         Scene gameOverScene = new Scene(gameOverPage);
+        Scene helpScene = new Scene(helpPage);
+        helpScene.getStylesheets().add("stylesheets/landingPage.css");
+
 
         // vGuess LOGO
         ImageView logo  = new ImageView("vguessLogo.png");
@@ -143,6 +156,30 @@ public class Main extends Application {
         Button startGameBtn = new Button("Start Game");
         startGameBtn.getStyleClass().add("startGameBtn");
         landingPage.getChildren().add(startGameBtn);
+
+        landingPage.getChildren().add(helpButton);
+
+        helpButton.setOnAction(actionEvent -> {
+                    //Change Scene
+                    stage.setScene(helpScene);
+                    //Help Page
+                    Label helpLabel = new Label("Welcome to Vguess!!!!\n\n" +
+                            "This Application is designed to help you learn your programming syntax\n\n\n" +
+                            "Here are the Rules\n" +
+                            "1). Chose the language you want to learn.\n\n" +
+                            "2). You will be given a random word related to the Language.\n\n" +
+                            "3). The Hint to the word will also be given.\n\n" +
+                            "4). You will have to guess the words before you run out of lives.\n" +
+                            "\n" +
+                            "Have Fun!!");
+                    helpPage.getChildren().add(homeButton);
+                    helpPage.getChildren().add(helpLabel);
+                    helpLabel.getStyleClass().add("helpPage");
+                });
+
+        homeButton.setOnAction(actionEvent -> {
+            stage.setScene(landingScene);
+        });
 
         /* GAME PAGE */
         dashWord.getStyleClass().add("dashWord");
