@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ public class Main extends Application {
     Label lifeLabel = new Label("Lives Remaining: 6");
     TextField userInput = new TextField();
     Button startGameBtn = new Button("Start Game");
-    startGameBtn.getStyleClass().add("startGameBtn");
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -87,6 +88,14 @@ public class Main extends Application {
 
         Button helpButton = new Button("Help");
         helpButton.getStyleClass().add("helpButton");
+        startGameBtn.getStyleClass().add("startGameBtn");
+
+        Button aboutButton = new Button("About");
+        aboutButton.getStyleClass().add("helpButton");
+
+        HBox helpAndAbout = new HBox(helpButton,aboutButton);
+        helpAndAbout.setSpacing(20);
+        helpAndAbout.setAlignment(Pos.BASELINE_CENTER);
 
         Button homeButton = new Button("Home");
         homeButton.getStyleClass().add("homeButton");
@@ -159,7 +168,7 @@ public class Main extends Application {
        
         landingPage.getChildren().add(startGameBtn);
 
-        landingPage.getChildren().add(helpButton);
+        landingPage.getChildren().add(helpAndAbout);
 
         helpButton.setOnAction(actionEvent -> {
                     //Change Scene
