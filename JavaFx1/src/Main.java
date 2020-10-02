@@ -26,6 +26,8 @@ public class Main extends Application {
     Label hintWord  = new Label(hint);
     Label lifeLabel = new Label("Lives Remaining: 6");
     TextField userInput = new TextField();
+    Button startGameBtn = new Button("Start Game");
+    startGameBtn.getStyleClass().add("startGameBtn");
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -123,38 +125,38 @@ public class Main extends Application {
         landingPage.getChildren().add(menu1);
 
         lang1.setOnAction(actionEvent -> {
+            startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang1.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang1.getText());
         });
         lang2.setOnAction(actionEvent -> {
+            startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang2.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang2.getText());
         });
-        lang2.setOnAction(actionEvent -> {
-            choiceSelected = lang2.getText();
-            System.out.println(choiceSelected);
-            selectedLang.setText("Selected Language : "+lang2.getText());
-        });
+        
         lang3.setOnAction(actionEvent -> {
+            startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang3.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang3.getText());
         });
         lang4.setOnAction(actionEvent -> {
+            startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang4.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang4.getText());
         });
         lang5.setOnAction(actionEvent -> {
+            startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang5.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang5.getText());
         });
 
-        Button startGameBtn = new Button("Start Game");
-        startGameBtn.getStyleClass().add("startGameBtn");
+       
         landingPage.getChildren().add(startGameBtn);
 
         landingPage.getChildren().add(helpButton);
