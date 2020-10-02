@@ -15,6 +15,7 @@
 .dashWord{
  -fx-text-fill: #A6B1E1;
  -fx-font-size: 35px;
+ -fx-letter-spacing: 20px;
 }
 .hintWord{
  -fx-text-fill: #A6B1E1;

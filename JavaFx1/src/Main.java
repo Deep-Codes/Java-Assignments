@@ -3,11 +3,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -22,8 +20,6 @@ public class Main extends Application {
     String choiceSelected;
     String genWord;
     int initDashed = 1;
-//    int livesRemaining = 6;
-    String userGuess;
     String hint = "hint to show";
     String word = "dashed word to show";
     Label dashWord = new Label(word);
@@ -71,20 +67,30 @@ public class Main extends Application {
         VBox landingPage = new VBox();
         landingPage.setAlignment(Pos.CENTER);
         landingPage.setSpacing(20);
+
         VBox gamePage = new VBox();
         gamePage.setAlignment(Pos.CENTER);
         gamePage.setSpacing(20);
+
+        // Game Over Page
+        VBox gameOverPage = new VBox();
+        gameOverPage.setAlignment(Pos.CENTER);
+        gameOverPage.setSpacing(20);
+
+
+        // Help Page
+        // Credits Page
 
         // Scenes
         Scene landingScene = new Scene(landingPage);
         landingScene.getStylesheets().add("stylesheets/landingPage.css");
         Scene gameScene = new Scene(gamePage);
         gameScene.getStylesheets().add("stylesheets/landingPage.css");
+        Scene gameOverScene = new Scene(gameOverPage);
 
         // vGuess LOGO
         ImageView logo  = new ImageView("vguessLogo.png");
         landingPage.getChildren().add(logo);
-
 
         //  Language
         Label selectedLang = new Label("Selected Language : None");
@@ -96,18 +102,42 @@ public class Main extends Application {
         // Menu Items
         MenuItem lang1 = new MenuItem("Java");
         MenuItem lang2 = new MenuItem("JavaScript");
-        MenuItem lang3 = new MenuItem("React");
+        MenuItem lang3 = new MenuItem("Python");
         MenuItem lang4 = new MenuItem("HTML");
         MenuItem lang5 = new MenuItem("CSS");
-        MenuItem lang6 = new MenuItem("Python");
 
-        MenuButton menu1 = new MenuButton("Select a Language",null,lang1,lang2,lang3,lang4,lang5,lang6);
+        MenuButton menu1 = new MenuButton("Select a Language",null,lang1,lang2,lang3,lang4,lang5);
         landingPage.getChildren().add(menu1);
 
-        lang6.setOnAction(actionEvent -> {
-            choiceSelected = lang6.getText();
-//            System.out.println(choiceSelected);
-            selectedLang.setText("Selected Language : "+lang6.getText());
+        lang1.setOnAction(actionEvent -> {
+            choiceSelected = lang1.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang1.getText());
+        });
+        lang2.setOnAction(actionEvent -> {
+            choiceSelected = lang2.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang2.getText());
+        });
+        lang2.setOnAction(actionEvent -> {
+            choiceSelected = lang2.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang2.getText());
+        });
+        lang3.setOnAction(actionEvent -> {
+            choiceSelected = lang3.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang3.getText());
+        });
+        lang4.setOnAction(actionEvent -> {
+            choiceSelected = lang4.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang4.getText());
+        });
+        lang5.setOnAction(actionEvent -> {
+            choiceSelected = lang5.getText();
+            System.out.println(choiceSelected);
+            selectedLang.setText("Selected Language : "+lang5.getText());
         });
 
         Button startGameBtn = new Button("Start Game");
@@ -165,7 +195,8 @@ public class Main extends Application {
             genWord = generateWord(choiceSelected);
         });
 
-
+        ImageView winningGif  = new ImageView("vguessLogo.png");
+        gameOverPage.getChildren().add(winningGif);
 
         // Set up the Scene
         stage.setScene(landingScene);
@@ -177,38 +208,188 @@ public class Main extends Application {
 
     public String generateWord(String choiceSelected) {
         System.out.println(choiceSelected);
-        if (choiceSelected.equals("Python")){
-            ArrayList<String> wordsList = new ArrayList<String>();
-            wordsList.add("py");
-            wordsList.add("lambda");
-            wordsList.add("ArithmeticError");
-            wordsList.add("remove");
-            wordsList.add("capitalize");
+        switch (choiceSelected) {
+            case "Python": {
+                ArrayList<String> wordsList = new ArrayList<String>();
+                wordsList.add("py");
+                wordsList.add("lambda");
+                wordsList.add("ArithmeticError");
+                wordsList.add("remove");
+                wordsList.add("capitalize");
 
-            Random rand = new Random();
-            int random = (int)(Math.random() * (wordsList.size()));
-            randomGenWord = wordsList.get(random);
+                Random rand = new Random();
+                int random = (int) (Math.random() * (wordsList.size()));
+                randomGenWord = wordsList.get(random);
 
-            Dictionary list = new Hashtable();
-            list.put("py","What is the correct file extension for Python files?");
-            list.put("lambda","what is used to create an anonymous function? ");
-            list.put("ArithmeticError","Raised when an error occurs in numeric calculations.");
-            list.put("remove","Removes the specified element of a set/list.");
-            list.put("capitalize"," used to convert the first character to upper case.");
-            genWord = randomGenWord;
-            hint = (String) list.get(randomGenWord);
-            System.out.println(randomGenWord);
-            System.out.println("Hint: "+list.get(randomGenWord));
+                Dictionary list = new Hashtable();
+                list.put("py", "What is the correct file extension for Python files?");
+                list.put("lambda", "what is used to create an anonymous function? ");
+                list.put("ArithmeticError", "Raised when an error occurs in numeric calculations.");
+                list.put("remove", "Removes the specified element of a set/list.");
+                list.put("capitalize", " used to convert the first character to upper case.");
+                genWord = randomGenWord;
+                hint = (String) list.get(randomGenWord);
+                System.out.println(randomGenWord);
+                System.out.println("Hint: " + list.get(randomGenWord));
 
-            if ( initDashed == 1){
-                initDashed--;
-                System.out.println("I run only once");
-                asterisk = new String(new char[genWord.length()]).replace("\0", "*");
-                dashWord.setText(asterisk);
+                if (initDashed == 1) {
+                    initDashed--;
+                    System.out.println("I run only once");
+                    asterisk = new String(new char[genWord.length()]).replace("\0", "*");
+                    dashWord.setText(asterisk.replace("", "  ").trim());
+                }
+
+                hintWord.setText(hint);
+                break;
             }
-//            dashWord.setText(genWord);
-            hintWord.setText(hint);
+            case "JavaScript": {
+                ArrayList<String> wordsList = new ArrayList<String>();
+                wordsList.add("promise");
+                wordsList.add("this");
+                wordsList.add("react");
+                wordsList.add("parseint");
+                wordsList.add("tostring");
+                wordsList.add("addeventlistener");
+                wordsList.add("setinterval");
+                wordsList.add("settimeout");
+                wordsList.add("getComputedStyle");
+                wordsList.add("alert");
 
+                Random rand = new Random();
+                int random = (int) (Math.random() * (wordsList.size()));
+                randomGenWord = wordsList.get(random);
+
+                Dictionary list = new Hashtable();
+                list.put("promise", "object represents the eventual completion  of an asynchronous operation");
+                list.put("react", "Most Popular Javascript Framework");
+                list.put("parseint", "parses a string and returns an integer");
+                list.put("tostring", "method returns the string representation of the object");
+                list.put("addeventlistener", "method attaches an event handler to the document.");
+                list.put("setinterval", "method calls a function or evaluates an expression at specified intervals ");
+                list.put("settimeout", "method calls a function after a specified number of milliseconds");
+                list.put("getComputedStyle", "method gets all the actual CSS property");
+                list.put("alert", "method displays an alert box with a specified message");
+                genWord = randomGenWord;
+                hint = (String) list.get(randomGenWord);
+                System.out.println(randomGenWord);
+                System.out.println("Hint: " + list.get(randomGenWord));
+
+                if (initDashed == 1) {
+                    initDashed--;
+                    System.out.println("I run only once");
+                    asterisk = new String(new char[genWord.length()]).replace("\0", "*");
+                    dashWord.setText(asterisk.replace("", "  ").trim());
+                }
+
+                hintWord.setText(hint);
+                break;
+            }
+            case "Java": {
+                ArrayList<String> wordsList = new ArrayList<String>();
+                wordsList.add("scanner");
+                wordsList.add("arraylist");
+                wordsList.add("length");
+                wordsList.add("decimalformat");
+                wordsList.add("stringbuilder");
+                wordsList.add("stage");
+                wordsList.add("wrapper");
+                wordsList.add("interface");
+                wordsList.add("getComputedStyle");
+                wordsList.add("alert");
+
+                Random rand = new Random();
+                int random = (int) (Math.random() * (wordsList.size()));
+                randomGenWord = wordsList.get(random);
+
+                Dictionary list = new Hashtable();
+                list.put("scanner", "Class for taking user input");
+                list.put("arraylist", "Datatype for creating list");
+                list.put("length", "method to find the length of a string");
+                list.put("decimalformat", "limiting decimal counts");
+                list.put("stringbuilder", "A mutable sequence of characters.");
+                list.put("stage", "Used to Create a JavaFx Window");
+                list.put("wrapper", "class contains primitive data types");
+                list.put("interface", "way to achieve abstraction in Java");
+                list.put("final", "used in several contexts to define an entity that can only be assigned once");
+                genWord = randomGenWord;
+                hint = (String) list.get(randomGenWord);
+                System.out.println(randomGenWord);
+                System.out.println("Hint: " + list.get(randomGenWord));
+
+                if (initDashed == 1) {
+                    initDashed--;
+                    System.out.println("I run only once");
+                    asterisk = new String(new char[genWord.length()]).replace("\0", "*");
+                    dashWord.setText(asterisk.replace("", "  ").trim());
+                }
+
+                hintWord.setText(hint);
+                break;
+            }
+            case "CSS": {
+                ArrayList<String> wordsList = new ArrayList<String>();
+                wordsList.add("style");
+                wordsList.add("color");
+                wordsList.add("positioned");
+                wordsList.add("transition");
+                wordsList.add("linear");
+                wordsList.add("keyframes");
+
+                Random rand = new Random();
+                int random = (int) (Math.random() * (wordsList.size()));
+                randomGenWord = wordsList.get(random);
+
+                Dictionary list = new Hashtable();
+                list.put("style", "HTML tag is used to define an internal style sheet");
+                list.put("color", "CSS property is used to change the text color of an element");
+                list.put("positioned", "one of the 4 layout modes before flex-box");
+                list.put("transition", "limiting decimal counts");
+                list.put("linear", "transition effect with same speed start-end");
+                list.put("keyframes", "KeyWord Css Animation");
+                genWord = randomGenWord;
+                hint = (String) list.get(randomGenWord);
+                System.out.println(randomGenWord);
+                System.out.println("Hint: " + list.get(randomGenWord));
+
+                if (initDashed == 1) {
+                    initDashed--;
+                    System.out.println("I run only once");
+                    asterisk = new String(new char[genWord.length()]).replace("\0", "*");
+                    dashWord.setText(asterisk.replace("", "  ").trim());
+                }
+
+                hintWord.setText(hint);
+                break;
+            }
+            case "HTML": {
+                ArrayList<String> wordsList = new ArrayList<String>();
+                wordsList.add("image");
+                wordsList.add("anchor");
+                wordsList.add("div");
+
+                Random rand = new Random();
+                int random = (int) (Math.random() * (wordsList.size()));
+                randomGenWord = wordsList.get(random);
+
+                Dictionary list = new Hashtable();
+                list.put("image", "add images and gifs");
+                list.put("anchor", "links and all stuff");
+                list.put("div", "box");
+                genWord = randomGenWord;
+                hint = (String) list.get(randomGenWord);
+                System.out.println(randomGenWord);
+                System.out.println("Hint: " + list.get(randomGenWord));
+
+                if (initDashed == 1) {
+                    initDashed--;
+                    System.out.println("I run only once");
+                    asterisk = new String(new char[genWord.length()]).replace("\0", "*");
+                    dashWord.setText(asterisk.replace("", "  ").trim());
+                }
+
+                hintWord.setText(hint);
+                break;
+            }
         }
         return randomGenWord;
     }
@@ -236,7 +417,7 @@ public class Main extends Application {
             System.out.println("Correct! You win! The word was " + realWord);
         }
         System.out.println(asterisk);
-        dashWord.setText(asterisk);
+        dashWord.setText(asterisk.replace("", "  ").trim());
     }
 
     public static void main(String[] args) {
