@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -13,7 +12,6 @@ import java.util.Hashtable;
 import java.util.Random;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
-
 
 public class Main extends Application {
     String randomGenWord;
@@ -70,25 +68,28 @@ public class Main extends Application {
         VBox landingPage = new VBox();
         landingPage.setAlignment(Pos.CENTER);
         landingPage.setSpacing(20);
+        landingPage.getStyleClass().add("landingPage");
 
         VBox gamePage = new VBox();
         gamePage.setAlignment(Pos.CENTER);
         gamePage.setSpacing(20);
+        gamePage.getStyleClass().add("gamePage");
 
         // Game Over Page
         VBox gameOverPage = new VBox();
         gameOverPage.setAlignment(Pos.CENTER);
         gameOverPage.setSpacing(20);
 
-
         // Help Page
         VBox helpPage = new VBox();
         helpPage.setAlignment(Pos.CENTER);
         helpPage.setSpacing(20);
+        helpPage.getStyleClass().add("helpPage");
 
         Button helpButton = new Button("Help");
         helpButton.getStyleClass().add("helpButton");
         startGameBtn.getStyleClass().add("startGameBtn");
+        startGameBtn.setDisable(true);
 
         Button aboutButton = new Button("About");
         aboutButton.getStyleClass().add("helpButton");
@@ -100,7 +101,31 @@ public class Main extends Application {
         Button homeButton = new Button("Home");
         homeButton.getStyleClass().add("homeButton");
 
-        // Credits Page
+        // About Page
+        VBox aboutPage  = new VBox();
+        aboutPage.setAlignment(Pos.CENTER);
+        aboutPage.setSpacing(20);
+        aboutPage.getStyleClass().add("aboutPage");
+        aboutPage.getChildren().add(homeButton);
+        ImageView aboutHead = new ImageView("about.png");
+        aboutPage.getChildren().add(aboutHead);
+        aboutHead.getStyleClass().add("aboutHead");
+
+        Label aboutMade = new Label("Project Completed with Java and JavaFx");
+        aboutPage.getChildren().add(aboutMade);
+        aboutMade.getStyleClass().add("aboutMade");
+
+        Label aboutLabel = new Label(
+                "1) 19101A0004 Mohit Santosh \n\n" +
+                "2) 19101A0028 Aman Singh \n\n" +
+                "3) 19101A0029 Kaartik Nayak \n\n" +
+                "4) 19101A0033 Deepankar Bhade\n");
+        aboutLabel.getStyleClass().add("aboutLabel");
+        aboutPage.getChildren().add(aboutLabel);
+
+        Label aboutVersion = new Label("VGUESS v1.0.0");
+        aboutPage.getChildren().add(aboutVersion);
+        aboutVersion.getStyleClass().add("aboutVersion");
 
         // Scenes
         Scene landingScene = new Scene(landingPage);
@@ -111,9 +136,12 @@ public class Main extends Application {
         Scene helpScene = new Scene(helpPage);
         helpScene.getStylesheets().add("stylesheets/landingPage.css");
 
+        Scene aboutScene = new Scene(aboutPage);
+        aboutScene.getStylesheets().add("stylesheets/landingPage.css");
+
 
         // vGuess LOGO
-        ImageView logo  = new ImageView("vguessLogo.png");
+        ImageView logo  = new ImageView("logo1.png");
         landingPage.getChildren().add(logo);
 
         //  Language
@@ -134,38 +162,41 @@ public class Main extends Application {
         landingPage.getChildren().add(menu1);
 
         lang1.setOnAction(actionEvent -> {
+            startGameBtn.setDisable(false);
             startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang1.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang1.getText());
         });
         lang2.setOnAction(actionEvent -> {
+            startGameBtn.setDisable(false);
             startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang2.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang2.getText());
         });
-        
         lang3.setOnAction(actionEvent -> {
+            startGameBtn.setDisable(false);
             startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang3.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang3.getText());
         });
         lang4.setOnAction(actionEvent -> {
+            startGameBtn.setDisable(false);
             startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang4.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang4.getText());
         });
         lang5.setOnAction(actionEvent -> {
+            startGameBtn.setDisable(false);
             startGameBtn.getStyleClass().add("clickedStartGameBtn");
             choiceSelected = lang5.getText();
             System.out.println(choiceSelected);
             selectedLang.setText("Selected Language : "+lang5.getText());
         });
 
-       
         landingPage.getChildren().add(startGameBtn);
 
         landingPage.getChildren().add(helpAndAbout);
@@ -185,11 +216,15 @@ public class Main extends Application {
                             "Have Fun!!");
                     helpPage.getChildren().add(homeButton);
                     helpPage.getChildren().add(helpLabel);
-                    helpLabel.getStyleClass().add("helpPage");
+                    helpLabel.getStyleClass().add("helpLabel");
                 });
 
         homeButton.setOnAction(actionEvent -> {
             stage.setScene(landingScene);
+        });
+
+        aboutButton.setOnAction(actionEvent -> {
+            stage.setScene(aboutScene);
         });
 
         /* GAME PAGE */
@@ -199,20 +234,14 @@ public class Main extends Application {
         dashWord.setLineSpacing(20);
         gamePage.getChildren().add(dashWord);
 
-        lifeLabel.setLayoutX(260);
-        lifeLabel.setLayoutY(350);
         lifeLabel.getStyleClass().add("lifeLabel");
         gamePage.getChildren().add(lifeLabel);
 
         hintWord.getStyleClass().add("hintWord");
         landingPage.getChildren().add(hintWord);
-        hintWord.setLayoutX(260);
-        hintWord.setLayoutY(230);
         gamePage.getChildren().add(userInput);
         gamePage.getChildren().add(hintWord);
 
-        userInput.setLayoutX(260);
-        userInput.setLayoutY(270);
         userInput.setMaxWidth(160);
 
         Pattern pattern = Pattern.compile("[a-zA-Z]*");

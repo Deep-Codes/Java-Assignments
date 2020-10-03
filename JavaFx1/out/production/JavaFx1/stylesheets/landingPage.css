@@ -1,12 +1,29 @@
 .root{
- -fx-background-color:
-         linear-gradient(#0f4c75, #1b262c);
- -fx-font-family: 'Montserrat', Arial, sans-serif;
- -fx-text-fill: #A6B1E1;
+  -fx-font-family: 'Montserrat', Arial, sans-serif;
+  -fx-text-fill: #A6B1E1;
+  -fx-focus-color: transparent;
+}
+.landingPage{
+ -fx-background-image: url('../spaceBack.gif');
+}
+.gamePage{
+ -fx-background-image: url('../nightBack.gif');
+  -fx-background-repeat: repeat;
+  -fx-background-size: cover;
+}
+.helpPage{
+ -fx-background-image: url('../spaceBack.gif');
+ -fx-background-repeat: repeat;
+ -fx-background-size: cover;
+}
+.aboutPage{
+ -fx-background-image: url('../darkBack.gif');
+ -fx-background-repeat: repeat;
+ -fx-background-size: cover;
 }
 .selectedLang{
  -fx-font-size: 15px;
- -fx-text-fill: #A6B1E1;
+ -fx-text-fill: #F2F2F2;
 }
 .startGameBtn{
  -fx-background-color: #8d93ab;
@@ -17,26 +34,44 @@
  -fx-background-color: #ffffff;
 }
 .dashWord{
- -fx-text-fill: #A6B1E1;
+ -fx-text-fill: #F2F2F2;
  -fx-font-size: 35px;
  -fx-letter-spacing: 20px;
 }
 .hintWord{
- -fx-text-fill: #A6B1E1;
+ -fx-text-fill: #F2F2F2;
  -fx-font-size: 16px;
 }
 .lifeLabel{
- -fx-text-fill: #A6B1E1;
+ -fx-text-fill: #F2F2F2;
  -fx-font-size: 20px;
  -fx-font-weight: 500;
 }
 .text-input {
-   -fx-control-inner-background: #A6B1E1;
+   -fx-control-inner-background: #f2f2f2;
    -fx-text-fill: #1e1e1e;
    -fx-opacity: 1;
+   -fx-focus-color: -fx-control-inner-background ;
+   -fx-faint-focus-color: -fx-control-inner-background
  }
- .helpPage{
-  -fx-font-size: 13px;
+ .helpLabel{
+   -fx-font-size: 13px;
    -fx-font-family: 'Montserrat', Arial, sans-serif;
-   -fx-text-fill: #A6B1E1;
+   -fx-text-fill: #F2F2F2;
+ }
+ .aboutHead{
+   -fx-font-size: 33px;
+   -fx-font-family: 'Montserrat', Arial, sans-serif;
+   -fx-text-fill: #F2F2F2;
+ }
+ .aboutMade{
+  -fx-text-fill: #F2F2F2;
+  -fx-font-size: 23px;
+ }
+ .aboutLabel{
+  -fx-text-fill: #F2F2F2;
+ }
+ .aboutVersion{
+   -fx-text-fill: #F2F2F2;
+   -fx-font-size: 23px;
  }
