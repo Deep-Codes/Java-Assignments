@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ public class Main extends Application {
     Label lifeLabel = new Label("Lives Remaining: 6");
     TextField userInput = new TextField();
     Button startGameBtn = new Button("Start Game");
+
 
 
     @Override
@@ -117,9 +119,9 @@ public class Main extends Application {
 
         Label aboutLabel = new Label(
                 "1) 19101A0004 Mohit Santosh \n\n" +
-                "2) 19101A0028 Aman Singh \n\n" +
-                "3) 19101A0029 Kaartik Nayak \n\n" +
-                "4) 19101A0033 Deepankar Bhade\n");
+                        "2) 19101A0028 Aman Singh \n\n" +
+                        "3) 19101A0029 Kaartik Nayak \n\n" +
+                        "4) 19101A0033 Deepankar Bhade\n");
         aboutLabel.getStyleClass().add("aboutLabel");
         aboutPage.getChildren().add(aboutLabel);
 
@@ -202,22 +204,22 @@ public class Main extends Application {
         landingPage.getChildren().add(helpAndAbout);
 
         helpButton.setOnAction(actionEvent -> {
-                    //Change Scene
-                    stage.setScene(helpScene);
-                    //Help Page
-                    Label helpLabel = new Label("Welcome to Vguess!!!!\n\n" +
-                            "This Application is designed to help you learn your programming syntax\n\n\n" +
-                            "Here are the Rules\n" +
-                            "1). Chose the language you want to learn.\n\n" +
-                            "2). You will be given a random word related to the Language.\n\n" +
-                            "3). The Hint to the word will also be given.\n\n" +
-                            "4). You will have to guess the words before you run out of lives.\n" +
-                            "\n" +
-                            "Have Fun!!");
-                    helpPage.getChildren().add(homeButton);
-                    helpPage.getChildren().add(helpLabel);
-                    helpLabel.getStyleClass().add("helpLabel");
-                });
+            //Change Scene
+            stage.setScene(helpScene);
+            //Help Page
+            Label helpLabel = new Label("Welcome to Vguess!!!!\n\n" +
+                    "This Application is designed to help you learn your programming syntax\n\n\n" +
+                    "Here are the Rules\n" +
+                    "1). Chose the language you want to learn.\n\n" +
+                    "2). You will be given a random word related to the Language.\n\n" +
+                    "3). The Hint to the word will also be given.\n\n" +
+                    "4). You will have to guess the words before you run out of lives.\n" +
+                    "\n" +
+                    "Have Fun!!");
+            helpPage.getChildren().add(homeButton);
+            helpPage.getChildren().add(helpLabel);
+            helpLabel.getStyleClass().add("helpLabel");
+        });
 
         homeButton.setOnAction(actionEvent -> {
             stage.setScene(landingScene);
@@ -243,6 +245,7 @@ public class Main extends Application {
         gamePage.getChildren().add(hintWord);
 
         userInput.setMaxWidth(160);
+        userInput.setPromptText("Enter a Guess!");
 
         Pattern pattern = Pattern.compile("[a-zA-Z]*");
         UnaryOperator<TextFormatter.Change> filter = c -> {
@@ -260,14 +263,32 @@ public class Main extends Application {
         submitLetterBtn.setLayoutY(310);
         submitLetterBtn.getStyleClass().add("submitLetterBtn");
         gamePage.getChildren().add(submitLetterBtn);
-
+        gamePage.getChildren().add(homeButton);
         submitLetterBtn.setOnAction(actionEvent -> {
-            System.out.println(userInput.getText());
-            checkGuess(genWord,userInput.getText());
+            if(!userInput.getText().trim().isEmpty()) {
+
+                System.out.println(userInput.getText());
+                checkGuess(genWord, userInput.getText());
+                userInput.clear();
+            }
+            else
+            {
+                userInput.setPromptText("Enter a Guess!");
+                System.out.println("No Input");
+            }
+        });
+        userInput.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                System.out.println("Enter works");
+                System.out.println(userInput.getText());
+                checkGuess(genWord,userInput.getText());
+                userInput.clear();
+
+            }
         });
 
         startGameBtn.setOnAction(actionEvent ->{
-           // Change Scene
+            // Change Scene
             stage.setScene(gameScene);
             genWord = generateWord(choiceSelected);
         });
@@ -371,8 +392,8 @@ public class Main extends Application {
                 wordsList.add("stage");
                 wordsList.add("wrapper");
                 wordsList.add("interface");
-                wordsList.add("getComputedStyle");
-                wordsList.add("alert");
+
+
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -387,7 +408,8 @@ public class Main extends Application {
                 list.put("stage", "Used to Create a JavaFx Window");
                 list.put("wrapper", "class contains primitive data types");
                 list.put("interface", "way to achieve abstraction in Java");
-                list.put("final", "used in several contexts to define an entity that can only be assigned once");
+
+
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
                 System.out.println(randomGenWord);
