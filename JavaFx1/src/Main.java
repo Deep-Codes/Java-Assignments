@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
@@ -29,13 +30,13 @@ public class Main extends Application {
     Button startGameBtn = new Button("Start Game");
     int livesRemaining = 6;
     Boolean isGameOver = false;
+    ImageView sprite ;
 
 
     @Override
     public void start(Stage stage) throws Exception {
         /*
             TO DO Error List!!!!!
-
             Error in states after first game
             Mystery of Home Button in About Page
             Mystery of Home Button in Game Page
@@ -127,7 +128,7 @@ public class Main extends Application {
         aboutPage.getChildren().add(aboutHead);
         aboutHead.getStyleClass().add("aboutHead");
 
-        Label aboutMade = new Label("Project Completed with Java and JavaFx");
+        Label aboutMade = new Label("Project Completed with Java,JavaFx and CSS");
         aboutPage.getChildren().add(aboutMade);
         aboutMade.getStyleClass().add("aboutMade");
 
@@ -253,6 +254,13 @@ public class Main extends Application {
         });
 
         /* GAME PAGE */
+
+//      SPRITE
+        sprite = new ImageView("sp6.png");
+        sprite.setFitWidth(120);
+        sprite.setPreserveRatio(true);
+        gamePage.getChildren().add(sprite);
+
         dashWord.getStyleClass().add("dashWord");
         landingPage.getChildren().add(dashWord);
 
@@ -541,6 +549,26 @@ public class Main extends Application {
         }
         if (asterisk.equals(newasterisk)) {
             livesRemaining--;
+            if(livesRemaining == 5){
+                Image sp5 = new Image("sp5.png");
+                sprite.setImage(sp5);
+            }
+            if(livesRemaining == 4){
+                Image sp4 = new Image("sp4.png");
+                sprite.setImage(sp4);
+            }
+            if(livesRemaining == 3){
+                Image sp3 = new Image("sp3.png");
+                sprite.setImage(sp3);
+            }
+            if(livesRemaining == 2){
+                Image sp2 = new Image("sp2.png");
+                sprite.setImage(sp2);
+            }
+            if(livesRemaining == 1){
+                Image sp1 = new Image("sp1.png");
+                sprite.setImage(sp1);
+            }
             lifeLabel.setText("Lives Remaining: "+livesRemaining);
             System.out.println("Lives Remaining: "+livesRemaining);
             if(livesRemaining==0)
@@ -567,4 +595,3 @@ public class Main extends Application {
         System.out.println("Closing vGuess game");
     }
 }
-
