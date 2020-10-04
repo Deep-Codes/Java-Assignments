@@ -5,6 +5,13 @@
 }
 .landingPage{
  -fx-background-image: url('../spaceBack.gif');
+ -fx-background-repeat: repeat;
+    -fx-background-size: cover;
+}
+.gameOverPage{
+ -fx-background-image: url('../spaceBack.gif');
+ -fx-background-repeat: repeat;
+   -fx-background-size: cover;
 }
 .gamePage{
  -fx-background-image: url('../nightBack.gif');

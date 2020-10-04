@@ -27,11 +27,20 @@ public class Main extends Application {
     Label lifeLabel = new Label("Lives Remaining: 6");
     TextField userInput = new TextField();
     Button startGameBtn = new Button("Start Game");
-
+    int livesRemaining = 6;
+    Boolean isGameOver = false;
 
 
     @Override
     public void start(Stage stage) throws Exception {
+        /*
+            TO DO Error List!!!!!
+
+            Error in states after first game
+            Mystery of Home Button in About Page
+            Mystery of Home Button in Game Page
+            Set fixed Width & Height
+         */
 
         // Steps to Create JavaFx Scenes
 
@@ -59,6 +68,7 @@ public class Main extends Application {
         // Landing Scene ->
         // Start Game ->
 
+
         // Not to be altered
         stage.setTitle("vGuess");
         stage.setWidth(700);
@@ -81,6 +91,7 @@ public class Main extends Application {
         VBox gameOverPage = new VBox();
         gameOverPage.setAlignment(Pos.CENTER);
         gameOverPage.setSpacing(20);
+        gameOverPage.getStyleClass().add("gameOverPage");
 
         // Help Page
         VBox helpPage = new VBox();
@@ -103,12 +114,15 @@ public class Main extends Application {
         Button homeButton = new Button("Home");
         homeButton.getStyleClass().add("homeButton");
 
+        Button secondHomeButton = new Button("Home");
+        secondHomeButton.getStyleClass().add("homeButton");
+
         // About Page
         VBox aboutPage  = new VBox();
         aboutPage.setAlignment(Pos.CENTER);
         aboutPage.setSpacing(20);
         aboutPage.getStyleClass().add("aboutPage");
-        aboutPage.getChildren().add(homeButton);
+
         ImageView aboutHead = new ImageView("about.png");
         aboutPage.getChildren().add(aboutHead);
         aboutHead.getStyleClass().add("aboutHead");
@@ -128,6 +142,7 @@ public class Main extends Application {
         Label aboutVersion = new Label("VGUESS v1.0.0");
         aboutPage.getChildren().add(aboutVersion);
         aboutVersion.getStyleClass().add("aboutVersion");
+        aboutPage.getChildren().add(secondHomeButton);
 
         // Scenes
         Scene landingScene = new Scene(landingPage);
@@ -135,6 +150,7 @@ public class Main extends Application {
         Scene gameScene = new Scene(gamePage);
         gameScene.getStylesheets().add("stylesheets/landingPage.css");
         Scene gameOverScene = new Scene(gameOverPage);
+        gameOverScene.getStylesheets().add("stylesheets/landingPage.css");
         Scene helpScene = new Scene(helpPage);
         helpScene.getStylesheets().add("stylesheets/landingPage.css");
 
@@ -145,6 +161,10 @@ public class Main extends Application {
         // vGuess LOGO
         ImageView logo  = new ImageView("logo1.png");
         landingPage.getChildren().add(logo);
+        //Game Over Logo
+        ImageView gameOverImage = new ImageView("gameOver.png");
+        gameOverPage.getChildren().add(gameOverImage);
+        gameOverPage.getChildren().add(secondHomeButton);
 
         //  Language
         Label selectedLang = new Label("Selected Language : None");
@@ -224,6 +244,9 @@ public class Main extends Application {
         homeButton.setOnAction(actionEvent -> {
             stage.setScene(landingScene);
         });
+        secondHomeButton.setOnAction(actionEvent -> {
+            stage.setScene(landingScene);
+        });
 
         aboutButton.setOnAction(actionEvent -> {
             stage.setScene(aboutScene);
@@ -270,12 +293,18 @@ public class Main extends Application {
                 System.out.println(userInput.getText());
                 checkGuess(genWord, userInput.getText());
                 userInput.clear();
+                if(isGameOver)
+                {
+                    System.out.println("Game Over");
+                    stage.setScene(gameOverScene);
+                }
             }
             else
             {
                 userInput.setPromptText("Enter a Guess!");
                 System.out.println("No Input");
             }
+
         });
         userInput.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -283,18 +312,23 @@ public class Main extends Application {
                 System.out.println(userInput.getText());
                 checkGuess(genWord,userInput.getText());
                 userInput.clear();
+                if(isGameOver)
+                {
+                    System.out.println("Game Over");
+                    stage.setScene(gameOverScene);
+                }
 
             }
         });
 
         startGameBtn.setOnAction(actionEvent ->{
+            livesRemaining = 6;
+            lifeLabel.setText("Life Remaining: "+livesRemaining);
             // Change Scene
             stage.setScene(gameScene);
             genWord = generateWord(choiceSelected);
         });
 
-        ImageView winningGif  = new ImageView("vguessLogo.png");
-        gameOverPage.getChildren().add(winningGif);
 
         // Set up the Scene
         stage.setScene(landingScene);
@@ -493,7 +527,7 @@ public class Main extends Application {
         return randomGenWord;
     }
 
-    int livesRemaining = 6;
+
     public void checkGuess(String realWord , String userGuess ) {
         String newasterisk = "";
         for (int i = 0; i < realWord.length(); i++) {
@@ -509,14 +543,22 @@ public class Main extends Application {
             livesRemaining--;
             lifeLabel.setText("Lives Remaining: "+livesRemaining);
             System.out.println("Lives Remaining: "+livesRemaining);
+            if(livesRemaining==0)
+            {
+                System.out.println("You Lose");
+                isGameOver = true;
+            }
         } else {
             asterisk = newasterisk;
         }
         if (asterisk.equals(realWord)) {
             System.out.println("Correct! You win! The word was " + realWord);
+            isGameOver = true;
         }
         System.out.println(asterisk);
         dashWord.setText(asterisk.replace("", "  ").trim());
+
+
     }
 
     public static void main(String[] args) {
