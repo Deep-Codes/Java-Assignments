@@ -297,7 +297,6 @@ public class Main extends Application {
         gamePage.getChildren().add(homeButton);
         submitLetterBtn.setOnAction(actionEvent -> {
             if(!userInput.getText().trim().isEmpty()) {
-
                 System.out.println(userInput.getText());
                 checkGuess(genWord, userInput.getText());
                 userInput.clear();
@@ -325,13 +324,22 @@ public class Main extends Application {
                     System.out.println("Game Over");
                     stage.setScene(gameOverScene);
                 }
-
             }
         });
 
         startGameBtn.setOnAction(actionEvent ->{
+            // Init Dashed Boolean to Create new star string string
+            if ( initDashed == 0){
+                initDashed = 1;
+            }
+            // Init the Sprite to Sp6;
+            Image sp6 = new Image("sp6.png");
+            sprite.setImage(sp6);
+            // Init the Lives 6;
             livesRemaining = 6;
             lifeLabel.setText("Life Remaining: "+livesRemaining);
+            // Init gameOver
+            isGameOver = false;
             // Change Scene
             stage.setScene(gameScene);
             genWord = generateWord(choiceSelected);
