@@ -31,6 +31,7 @@ public class Main extends Application {
     int livesRemaining = 6;
     Boolean isGameOver = false;
     int levelCounter = 1;
+    Label levelLabel = new Label("Level "+levelCounter);
     ImageView sprite ;
 
 
@@ -74,7 +75,7 @@ public class Main extends Application {
         // Not to be altered
         stage.setTitle("vGuess");
         stage.setWidth(700);
-        stage.setHeight(500);
+        stage.setHeight(550);
 
         /* START OF THE LANDING PAGE */
 
@@ -268,6 +269,9 @@ public class Main extends Application {
         dashWord.setLineSpacing(20);
         gamePage.getChildren().add(dashWord);
 
+        levelLabel.getStyleClass().add("levelLabel");
+        gamePage.getChildren().add(levelLabel);
+
         lifeLabel.getStyleClass().add("lifeLabel");
         gamePage.getChildren().add(lifeLabel);
 
@@ -329,6 +333,9 @@ public class Main extends Application {
         });
 
         startGameBtn.setOnAction(actionEvent ->{
+            // Init Level Label
+            levelCounter = 1;
+            levelLabel.setText("Level "+levelCounter);
             // Init Dashed Boolean to Create new star string string
             if ( initDashed == 0){
                 initDashed = 1;
@@ -556,26 +563,55 @@ public class Main extends Application {
         }
         if (asterisk.equals(newasterisk)) {
             livesRemaining--;
-            if(livesRemaining == 5){
-                Image sp5 = new Image("sp5.png");
-                sprite.setImage(sp5);
+            if ( levelCounter == 1){
+                if(livesRemaining == 5){
+                    Image sp5 = new Image("sp5.png");
+                    sprite.setImage(sp5);
+                }
+                if(livesRemaining == 4){
+                    Image sp4 = new Image("sp4.png");
+                    sprite.setImage(sp4);
+                }
+                if(livesRemaining == 3){
+                    Image sp3 = new Image("sp3.png");
+                    sprite.setImage(sp3);
+                }
+                if(livesRemaining == 2){
+                    Image sp2 = new Image("sp2.png");
+                    sprite.setImage(sp2);
+                }
+                if(livesRemaining == 1){
+                    Image sp1 = new Image("sp1.png");
+                    sprite.setImage(sp1);
+                }
+            } else if (levelCounter == 2){
+                if(livesRemaining == 4){
+                    Image sp6 = new Image("sp6.png");
+                    sprite.setImage(sp6);
+                }
+                if(livesRemaining == 3){
+                    Image sp4 = new Image("sp4.png");
+                    sprite.setImage(sp4);
+                }
+                if(livesRemaining == 2){
+                    Image sp2 = new Image("sp2.png");
+                    sprite.setImage(sp2);
+                }
+                if(livesRemaining == 1){
+                    Image sp1 = new Image("sp1.png");
+                    sprite.setImage(sp1);
+                }
+            } else if (levelCounter == 3){
+                if(livesRemaining == 2){
+                    Image sp6 = new Image("sp6.png");
+                    sprite.setImage(sp6);
+                }
+                if(livesRemaining == 1){
+                    Image sp2 = new Image("sp2.png");
+                    sprite.setImage(sp2);
+                }
             }
-            if(livesRemaining == 4){
-                Image sp4 = new Image("sp4.png");
-                sprite.setImage(sp4);
-            }
-            if(livesRemaining == 3){
-                Image sp3 = new Image("sp3.png");
-                sprite.setImage(sp3);
-            }
-            if(livesRemaining == 2){
-                Image sp2 = new Image("sp2.png");
-                sprite.setImage(sp2);
-            }
-            if(livesRemaining == 1){
-                Image sp1 = new Image("sp1.png");
-                sprite.setImage(sp1);
-            }
+
             lifeLabel.setText("Lives Remaining: "+livesRemaining);
             System.out.println("Lives Remaining: "+livesRemaining);
             if(livesRemaining==0)
@@ -588,15 +624,17 @@ public class Main extends Application {
         }
         if (asterisk.equals(realWord)) {
             System.out.println("Correct! You win! The word was " + realWord);
-//
+
             levelCounter++;
             initDashed++;
             if ( levelCounter == 2){
                 livesRemaining = 4;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
+                levelLabel.setText("Level "+levelCounter);
             } else if (levelCounter == 3) {
                 livesRemaining = 2;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
+                levelLabel.setText("Level "+levelCounter);
             } else if (levelCounter == 4){
                 isGameOver = true;
             }
