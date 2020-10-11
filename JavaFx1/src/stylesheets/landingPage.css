@@ -82,3 +82,8 @@
    -fx-text-fill: #F2F2F2;
    -fx-font-size: 23px;
  }
+.levelLabel{
+ -fx-text-fill: #F2F2F2;
+ -fx-font-size: 16px;
+ -fx-font-weight: 500;
+}

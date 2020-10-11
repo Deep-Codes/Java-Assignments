@@ -124,6 +124,7 @@ public class Main extends Application {
         VBox aboutPage  = new VBox();
         aboutPage.setAlignment(Pos.CENTER);
         aboutPage.setSpacing(20);
+        aboutPage.getChildren().add(secondHomeButton);
         aboutPage.getStyleClass().add("aboutPage");
 
         ImageView aboutHead = new ImageView("about.png");
@@ -145,7 +146,7 @@ public class Main extends Application {
         Label aboutVersion = new Label("VGUESS v1.0.0");
         aboutPage.getChildren().add(aboutVersion);
         aboutVersion.getStyleClass().add("aboutVersion");
-        aboutPage.getChildren().add(secondHomeButton);
+
 
         // Scenes
         Scene landingScene = new Scene(landingPage);
