@@ -30,6 +30,7 @@ public class Main extends Application {
     Button startGameBtn = new Button("Start Game");
     int livesRemaining = 6;
     Boolean isGameOver = false;
+    int levelCounter = 1;
     ImageView sprite ;
 
 
@@ -400,7 +401,6 @@ public class Main extends Application {
                 wordsList.add("addeventlistener");
                 wordsList.add("setinterval");
                 wordsList.add("settimeout");
-                wordsList.add("getComputedStyle");
                 wordsList.add("alert");
 
                 Random rand = new Random();
@@ -415,7 +415,6 @@ public class Main extends Application {
                 list.put("addeventlistener", "method attaches an event handler to the document.");
                 list.put("setinterval", "method calls a function or evaluates an expression at specified intervals ");
                 list.put("settimeout", "method calls a function after a specified number of milliseconds");
-                list.put("getComputedStyle", "method gets all the actual CSS property");
                 list.put("alert", "method displays an alert box with a specified message");
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
@@ -589,11 +588,23 @@ public class Main extends Application {
         }
         if (asterisk.equals(realWord)) {
             System.out.println("Correct! You win! The word was " + realWord);
-            isGameOver = true;
+//
+            levelCounter++;
+            initDashed++;
+            if ( levelCounter == 2){
+                livesRemaining = 4;
+                lifeLabel.setText("Life Remaining: "+livesRemaining);
+            } else if (levelCounter == 3) {
+                livesRemaining = 2;
+                lifeLabel.setText("Life Remaining: "+livesRemaining);
+            } else if (levelCounter == 4){
+                isGameOver = true;
+            }
+            genWord = generateWord(choiceSelected);
+            System.out.println("Level" +levelCounter+"started");
         }
         System.out.println(asterisk);
         dashWord.setText(asterisk.replace("", "  ").trim());
-
 
     }
 
