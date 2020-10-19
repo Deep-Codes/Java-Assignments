@@ -381,6 +381,12 @@ public class Main extends Application {
                 wordsList.add("ArithmeticError");
                 wordsList.add("remove");
                 wordsList.add("capitalize");
+                wordsList.add("yield");
+                wordsList.add("from");
+                wordsList.add("elif");
+                wordsList.add("NameError");
+                wordsList.add("numpy");
+                wordsList.add("finally");
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -392,6 +398,13 @@ public class Main extends Application {
                 list.put("ArithmeticError", "Raised when an error occurs in numeric calculations.");
                 list.put("remove", "Removes the specified element of a set/list.");
                 list.put("capitalize", " used to convert the first character to upper case.");
+                list.put("finally","the block of code is always executed no matter if the try block raises an error or not.");
+                list.put("numpy", "library for the adding support for large, multi-dimensional arrays and matrices");
+                list.put("NameError", "Raised when a variable does not exist");
+                list.put("yield", "Used to end a function and returns a generator");
+                list.put("from", "Used To import specific parts of a module");
+                list.put("elif", "Used in conditional statements");
+
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
                 System.out.println(randomGenWord);
@@ -414,10 +427,16 @@ public class Main extends Application {
                 wordsList.add("react");
                 wordsList.add("parseint");
                 wordsList.add("tostring");
-                wordsList.add("addeventlistener");
+                wordsList.add("addEventListener");
                 wordsList.add("setinterval");
                 wordsList.add("settimeout");
                 wordsList.add("alert");
+                wordsList.add("angular");
+                wordsList.add("instanceof");
+                wordsList.add("innerHTML");
+                wordsList.add("appendChild");
+                wordsList.add("object");
+                wordsList.add("ajax");
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -428,10 +447,17 @@ public class Main extends Application {
                 list.put("react", "Most Popular Javascript Framework");
                 list.put("parseint", "parses a string and returns an integer");
                 list.put("tostring", "method returns the string representation of the object");
-                list.put("addeventlistener", "method attaches an event handler to the document.");
+                list.put("addEventListener", "method attaches an event handler to the document.");
                 list.put("setinterval", "method calls a function or evaluates an expression at specified intervals ");
                 list.put("settimeout", "method calls a function after a specified number of milliseconds");
                 list.put("alert", "method displays an alert box with a specified message");
+                list.put("appendChild", "Appends a node as the last child of a node.");
+                list.put("innerHTML", "used to access the inner script of a html element");
+                list.put("instanceof", "checks whether an object is an instance of a specific class or an interface.");
+                list.put("angular", "Popular JavaScript Framework");
+                list.put("ajax","set of web development techniques to create asynchronous web applications.");
+                list.put("object", "abbreviations of O in JSON");
+
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
                 System.out.println(randomGenWord);
