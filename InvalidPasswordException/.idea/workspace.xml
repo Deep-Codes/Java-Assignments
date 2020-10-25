@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="81640fb0-4ae7-4105-96be-5d1fab0a377d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1imXjjVDH44iFMJPNyH5aGGxCnF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Password" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Password" />
+      <module name="InvalidPasswordException" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Password" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81640fb0-4ae7-4105-96be-5d1fab0a377d" name="Default Changelist" comment="" />
+      <created>1602513877280</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602513877280</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1398" height="190" key="GridCell.Tab.0.bottom" timestamp="1602514451521">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="190" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1602514451521" />
+    <state width="1398" height="190" key="GridCell.Tab.0.center" timestamp="1602514451521">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="190" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1602514451521" />
+    <state width="1398" height="190" key="GridCell.Tab.0.left" timestamp="1602514451521">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="190" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1602514451521" />
+    <state width="1398" height="190" key="GridCell.Tab.0.right" timestamp="1602514451521">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="190" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1602514451521" />
+  </component>
+</project>

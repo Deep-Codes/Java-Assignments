@@ -36,9 +36,13 @@ public class Main extends Application {
     int livesRemaining = 6;
     Boolean isGameOver = false;
     int levelCounter = 1;
+    int scoreCounter = 0;
     int questionCounter = 1;
-    Label levelLabel = new Label("Level "+levelCounter);
+    Label levelLabel = new Label("Level: "+levelCounter);
+    Label scoreLabel = new Label("Score: "+scoreCounter);
+    Label gameOverScoreLabel = new Label();
     ImageView sprite ;
+
 
 
 
@@ -122,6 +126,10 @@ public class Main extends Application {
         helpAndAbout.setSpacing(20);
         helpAndAbout.setAlignment(Pos.BASELINE_CENTER);
 
+        HBox scoreAndLevel = new HBox(scoreLabel,levelLabel);
+        scoreAndLevel.setSpacing(20);
+        scoreAndLevel.setAlignment(Pos.BASELINE_CENTER);
+
         Button homeButton = new Button("Home");
         homeButton.getStyleClass().add("homeButton");
 
@@ -176,6 +184,8 @@ public class Main extends Application {
         //Game Over Logo
         ImageView gameOverImage = new ImageView("gameOver.png");
         gameOverPage.getChildren().add(gameOverImage);
+        gameOverPage.getChildren().add(gameOverScoreLabel);
+        gameOverScoreLabel.getStyleClass().add("gameOverScoreLabel");
         gameOverPage.getChildren().add(secondHomeButton);
 
         //  Language
@@ -279,7 +289,12 @@ public class Main extends Application {
         gamePage.getChildren().add(dashWord);
 
         levelLabel.getStyleClass().add("levelLabel");
-        gamePage.getChildren().add(levelLabel);
+//        gamePage.getChildren().add(levelLabel);
+
+        scoreLabel.getStyleClass().add("scoreLabel");
+//        gamePage.getChildren().add(scoreLabel);
+
+        gamePage.getChildren().add(scoreAndLevel);
 
         lifeLabel.getStyleClass().add("lifeLabel");
         gamePage.getChildren().add(lifeLabel);
@@ -317,6 +332,14 @@ public class Main extends Application {
                 if(isGameOver)
                 {
                     System.out.println("Game Over");
+
+                    if(scoreCounter < 9){
+                        gameOverScoreLabel.setText("You Lose:  \n Your Score : "+scoreCounter);
+                    } else if(scoreCounter == 9) {
+                        gameOverScoreLabel.setText("Congratulations!!: \n Your Score : "+scoreCounter);
+                    }
+
+
                     stage.setScene(gameOverScene);
                 }
             }
@@ -336,15 +359,22 @@ public class Main extends Application {
                 if(isGameOver)
                 {
                     System.out.println("Game Over");
+                    if(scoreCounter < 9){
+                        gameOverScoreLabel.setText("You Lose  Your Score : "+scoreCounter);
+                    } else if(scoreCounter == 9) {
+                        gameOverScoreLabel.setText("Congratulations!! Your Score : "+scoreCounter);
+                    }
                     stage.setScene(gameOverScene);
                 }
             }
         });
 
         startGameBtn.setOnAction(actionEvent ->{
+            // Init Score Counter
+            scoreCounter = 0;
             // Init Level Label
             levelCounter = 1;
-            levelLabel.setText("Level "+levelCounter);
+            levelLabel.setText("Level: "+levelCounter);
             // Init Dashed Boolean to Create new star string string
             if ( initDashed == 0){
                 initDashed = 1;
@@ -489,8 +519,6 @@ public class Main extends Application {
                 wordsList.add("static");
                 wordsList.add("extends");
                 wordsList.add("enum");
-
-
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -671,18 +699,20 @@ public class Main extends Application {
         }
         if (asterisk.equals(realWord)) {
             System.out.println("Correct! You win! The word was " + realWord);
+            scoreCounter++;
+            scoreLabel.setText("Score: " +scoreCounter);
             questionCounter++;
             if(questionCounter == 2)
             {
                 livesRemaining = 6;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
-                levelLabel.setText("Level "+levelCounter);
+                levelLabel.setText("Level: "+levelCounter);
             }
             if(questionCounter == 3)
             {
                 livesRemaining = 6;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
-                levelLabel.setText("Level "+levelCounter);
+                levelLabel.setText("Level: "+levelCounter);
             }
             if(questionCounter == 4) {
                 levelCounter++;
@@ -692,16 +722,16 @@ public class Main extends Application {
             if ( levelCounter == 2){
                 livesRemaining = 4;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
-                levelLabel.setText("Level "+levelCounter);
+                levelLabel.setText("Level: "+levelCounter);
             } else if (levelCounter == 3) {
                 livesRemaining = 2;
                 lifeLabel.setText("Life Remaining: "+livesRemaining);
-                levelLabel.setText("Level "+levelCounter);
+                levelLabel.setText("Level: "+levelCounter);
             } else if (levelCounter == 4){
                 isGameOver = true;
             }
             genWord = generateWord(choiceSelected);
-            System.out.println("Level" +levelCounter+"started");
+            System.out.println("Level: " +levelCounter+"started");
         }
         System.out.println(asterisk);
         dashWord.setText(asterisk.replace("", "  ").trim());

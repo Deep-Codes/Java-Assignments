@@ -87,3 +87,13 @@
  -fx-font-size: 16px;
  -fx-font-weight: 500;
 }
+.scoreLabel{
+ -fx-text-fill: #F2F2F2;
+ -fx-font-size: 16px;
+ -fx-font-weight: 500;
+}
+.gameOverScoreLabel{
+ -fx-text-fill: #F2F2F2;
+ -fx-font-size: 24px;
+ -fx-font-weight: 500;
+ }
