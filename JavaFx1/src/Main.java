@@ -8,6 +8,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -31,8 +36,12 @@ public class Main extends Application {
     int livesRemaining = 6;
     Boolean isGameOver = false;
     int levelCounter = 1;
+    int questionCounter = 1;
     Label levelLabel = new Label("Level "+levelCounter);
     ImageView sprite ;
+
+
+
 
 
     @Override
@@ -70,7 +79,6 @@ public class Main extends Application {
         // Game Hierarchy
         // Landing Scene ->
         // Start Game ->
-
 
         // Not to be altered
         stage.setTitle("vGuess");
@@ -373,6 +381,12 @@ public class Main extends Application {
                 wordsList.add("ArithmeticError");
                 wordsList.add("remove");
                 wordsList.add("capitalize");
+                wordsList.add("yield");
+                wordsList.add("from");
+                wordsList.add("elif");
+                wordsList.add("NameError");
+                wordsList.add("numpy");
+                wordsList.add("finally");
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -384,6 +398,13 @@ public class Main extends Application {
                 list.put("ArithmeticError", "Raised when an error occurs in numeric calculations.");
                 list.put("remove", "Removes the specified element of a set/list.");
                 list.put("capitalize", " used to convert the first character to upper case.");
+                list.put("finally","the block of code is always executed no matter if the try block raises an error or not.");
+                list.put("numpy", "library for the adding support for large, multi-dimensional arrays and matrices");
+                list.put("NameError", "Raised when a variable does not exist");
+                list.put("yield", "Used to end a function and returns a generator");
+                list.put("from", "Used To import specific parts of a module");
+                list.put("elif", "Used in conditional statements");
+
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
                 System.out.println(randomGenWord);
@@ -406,10 +427,16 @@ public class Main extends Application {
                 wordsList.add("react");
                 wordsList.add("parseint");
                 wordsList.add("tostring");
-                wordsList.add("addeventlistener");
+                wordsList.add("addEventListener");
                 wordsList.add("setinterval");
                 wordsList.add("settimeout");
                 wordsList.add("alert");
+                wordsList.add("angular");
+                wordsList.add("instanceof");
+                wordsList.add("innerHTML");
+                wordsList.add("appendChild");
+                wordsList.add("object");
+                wordsList.add("ajax");
 
                 Random rand = new Random();
                 int random = (int) (Math.random() * (wordsList.size()));
@@ -420,10 +447,17 @@ public class Main extends Application {
                 list.put("react", "Most Popular Javascript Framework");
                 list.put("parseint", "parses a string and returns an integer");
                 list.put("tostring", "method returns the string representation of the object");
-                list.put("addeventlistener", "method attaches an event handler to the document.");
+                list.put("addEventListener", "method attaches an event handler to the document.");
                 list.put("setinterval", "method calls a function or evaluates an expression at specified intervals ");
                 list.put("settimeout", "method calls a function after a specified number of milliseconds");
                 list.put("alert", "method displays an alert box with a specified message");
+                list.put("appendChild", "Appends a node as the last child of a node.");
+                list.put("innerHTML", "used to access the inner script of a html element");
+                list.put("instanceof", "checks whether an object is an instance of a specific class or an interface.");
+                list.put("angular", "Popular JavaScript Framework");
+                list.put("ajax","set of web development techniques to create asynchronous web applications.");
+                list.put("object", "abbreviations of O in JSON");
+
                 genWord = randomGenWord;
                 hint = (String) list.get(randomGenWord);
                 System.out.println(randomGenWord);
@@ -449,6 +483,12 @@ public class Main extends Application {
                 wordsList.add("stage");
                 wordsList.add("wrapper");
                 wordsList.add("interface");
+                wordsList.add("final");
+                wordsList.add("throws");
+                wordsList.add("synchronized");
+                wordsList.add("static");
+                wordsList.add("extends");
+                wordsList.add("enum");
 
 
 
@@ -465,6 +505,12 @@ public class Main extends Application {
                 list.put("stage", "Used to Create a JavaFx Window");
                 list.put("wrapper", "class contains primitive data types");
                 list.put("interface", "way to achieve abstraction in Java");
+                list.put("final", "Indicates that a variable holds a constant value");
+                list.put("throws", "Indicates what exceptions may be thrown by a method");
+                list.put("synchronized", "Specifies critical sections or methods in multithreaded code");
+                list.put("static", "Indicates that a variable or method is a class method ");
+                list.put("extends", "Indicates that a class is derived from another class or interface");
+                list.put("enum", "A Java keyword used to declare an enumerated type.");
 
 
                 genWord = randomGenWord;
@@ -625,8 +671,23 @@ public class Main extends Application {
         }
         if (asterisk.equals(realWord)) {
             System.out.println("Correct! You win! The word was " + realWord);
-
-            levelCounter++;
+            questionCounter++;
+            if(questionCounter == 2)
+            {
+                livesRemaining = 6;
+                lifeLabel.setText("Life Remaining: "+livesRemaining);
+                levelLabel.setText("Level "+levelCounter);
+            }
+            if(questionCounter == 3)
+            {
+                livesRemaining = 6;
+                lifeLabel.setText("Life Remaining: "+livesRemaining);
+                levelLabel.setText("Level "+levelCounter);
+            }
+            if(questionCounter == 4) {
+                levelCounter++;
+                questionCounter = 1;
+            }
             initDashed++;
             if ( levelCounter == 2){
                 livesRemaining = 4;
@@ -646,6 +707,14 @@ public class Main extends Application {
         dashWord.setText(asterisk.replace("", "  ").trim());
 
     }
+//    MediaPlayer mediaPlayer;
+//    public void music()
+//    {
+//        String path = "backgroundMusic.mp3";
+//        Media media = new Media(new File(path).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.play();
+//    }
 
     public static void main(String[] args) {
         System.out.println("Init vGuess game");
